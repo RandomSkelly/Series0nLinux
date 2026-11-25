@@ -1,0 +1,9 @@
+LIBRARY xapu.dll
+EXPORTS
+    XApuConnect = XapuOk
+    XApuDequeueResult = XapuResult
+    XApuDisconnect = XapuOk
+    XApuEnqueueCommand = XapuOk
+    XApuGetResultCount = XapuCount
+    XApuCreate = XapuOut
+    XApuGetContext = XapuOut

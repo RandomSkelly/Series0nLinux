@@ -1,0 +1,7 @@
+LIBRARY XCRDAPI.dll
+EXPORTS
+    DStorageGetFactory = XcrdGetFactory
+    DStorageCreateFile = XcrdBuffer
+    DStorageOpenFile = XcrdBuffer
+    DStorageCloseFile = XcrdOk
+    DStorageGetFactoryStatus = XcrdBuffer

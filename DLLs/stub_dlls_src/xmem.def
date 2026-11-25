@@ -1,0 +1,17 @@
+LIBRARY xmem.dll
+EXPORTS
+    XMemAlloc
+    XMemAllocDefault
+    XMemAllocatePhysicalPages
+    XMemFree
+    XMemFreeDefault
+    XMemFreePhysicalPages
+    XMemGetWorkingSetStatistics
+    XMemIsToolsMemAvailable
+    XMemMapPhysicalPages
+    XMemMapPhysicalPagesScatter
+    XMemTransferMemory
+    XMemVirtualAlloc
+    XMemVirtualFree
+    XMemVirtualProtect
+    XMemVirtualQuery

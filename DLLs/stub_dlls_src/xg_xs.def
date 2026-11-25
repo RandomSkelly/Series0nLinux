@@ -1,0 +1,8 @@
+LIBRARY xg_xs.dll
+EXPORTS
+    XGCreateTextureComputer = XgCreateTextureComputer
+    XGSuggestSwizzleMode = XgSuggestSwizzleMode
+    XGCreateTextureDecoder = XgCreateTextureComputer
+    XGCreateTextureCompressor = XgCreateTextureComputer
+    XGGetTextureMemoryInfo = XgSuggestSwizzleMode
+    XGSubmitCommand = XgOk

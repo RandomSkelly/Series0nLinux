@@ -1,0 +1,14 @@
+LIBRARY AcpHal.dll
+EXPORTS
+    AcpHalCreate = AcpHalCreate
+    AcpHalAllocateShapeContexts = AcpHalOk
+    AcpHalReleaseShapeContexts = AcpHalOk
+    AcpHalGetShapeContext = AcpHalPointer
+    AcpHalSubmitCommand = AcpHalOk
+    AcpHalGetStatus = AcpHalBuffer
+    ApuAlloc = AcpHalPointer
+    ApuCreateHeap = AcpHalPointer
+    ApuFree = AcpHalOk
+    ApuIsVirtualAddressValid = AcpHalTrue
+    ApuMapApuAddress = AcpHalPointer
+    ApuMapVirtualAddress = AcpHalPointer

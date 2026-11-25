@@ -1,0 +1,27 @@
+LIBRARY acpx.dll
+EXPORTS
+    AcpCreate = AcpxPointer
+    AcpCreateContext = AcpxPointer
+    AcpCreateDecoder = AcpxPointer
+    AcpCreateEncoder = AcpxPointer
+    AcpGetContext = AcpxPointer
+    AcpGetDecoder = AcpxPointer
+    AcpGetEncoder = AcpxPointer
+    AcpInitialize = AcpxOk
+    AcpUninitialize = AcpxOk
+    AcpDestroy = AcpxOk
+    AcpRelease = AcpxOk
+    AcpProcess = AcpxOk
+    AcpSubmit = AcpxOk
+    AcpFlush = AcpxOk
+    AcpReset = AcpxOk
+    AcpSetFormat = AcpxOk
+    AcpGetFormat = AcpxBuffer
+    AcpGetBuffer = AcpxPointer
+    AcpGetStatus = AcpxBuffer
+    AcpIsAvailable = AcpxTrue
+    AcpxInitialize = AcpxOk
+    AcpxCreate = AcpxPointer
+    AcpxDestroy = AcpxOk
+    AcpxProcess = AcpxOk
+    AcpxGetHandle = AcpxHandle

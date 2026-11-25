@@ -1,0 +1,26 @@
+LIBRARY XStore.dll
+EXPORTS
+    XStoreQueryGameLicenseAsync
+    XStoreQueryGameLicenseResult
+    XStoreQueryGameLicenseResultSize
+    XStoreAcquireLicenseForDurablesAsync
+    XStoreAcquireLicenseForDurablesResult
+    XStoreAcquireLicenseForPackageAsync
+    XStoreAcquireLicenseForPackageResult
+    XStoreQueryEntitledProductsAsync
+    XStoreQueryEntitledProductsResult
+    XStoreQueryEntitledProductsResultSize
+    XStoreQueryAssociatedProductsAsync
+    XStoreQueryAssociatedProductsResult
+    XStoreQueryAssociatedProductsResultSize
+    XStoreQueryConsumableBalanceRemainingAsync
+    XStoreQueryConsumableBalanceRemainingResult
+    XStoreReportConsumableFulfillmentAsync
+    XStoreReportConsumableFulfillmentResult
+    XStoreShowProductPageUIAsync
+    XStoreShowPurchaseUIAsync
+    XStoreShowRedeemTokenUIAsync
+    XStoreGetUserCollectionsIdAsync
+    XStoreGetUserCollectionsIdResult
+    XStoreGetUserPurchaseIdAsync
+    XStoreGetUserPurchaseIdResult

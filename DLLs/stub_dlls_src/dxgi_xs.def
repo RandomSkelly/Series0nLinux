@@ -1,0 +1,12 @@
+LIBRARY dxgi_xs.dll
+EXPORTS
+    CreateDXGIFactory = XsCreateDXGIFactory
+    CreateDXGIFactory1 = XsCreateDXGIFactory1
+    CreateDXGIFactory2 = XsCreateDXGIFactory2
+    DXGIGetDebugInterface = XsDXGIGetDebugInterface
+    DXGIGetDebugInterface1 = XsDXGIGetDebugInterface1
+    DXGIDeclareAdapterRemovalSupport = XsDXGIDeclareAdapterRemovalSupport
+    DXGIXboxCreateSwapChain = XsDXGIXboxCreateSwapChain
+    DXGIXboxGetSwapChainStats = XsDXGIXboxGetSwapChainStats
+    DXGIXboxCreateFactory = XsDXGIXboxCreateFactory
+    DXGIXboxCreateSwapChainForCoreWindow = XsDXGIXboxCreateSwapChainForCoreWindow

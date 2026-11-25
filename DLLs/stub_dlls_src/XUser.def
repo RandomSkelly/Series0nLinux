@@ -1,0 +1,27 @@
+LIBRARY XUser.dll
+EXPORTS
+    XUserAddAsync
+    XUserAddResult
+    XUserFindUserById
+    XUserGetUserHandle
+    XUserGetId
+    XUserGetXuid
+    XUserGetGamerTag = UserGetGamertag
+    XUserGetGamertag = UserGetGamertag
+    XUserGetAgeGroup
+    XUserGetSignInState
+    XUserGetFirstSignInState
+    XUserGetMaxUsers
+    XUserCheckPrivilege
+    XUserClearCachedPrivileges
+    XUserSetPrivilege
+    XUserSignOut
+    XUserGetTokenAndSignatureAsync
+    XUserGetTokenAndSignatureResultSize
+    XUserGetTokenAndSignatureResult
+    XUserResolvePrivilegeWithUiAsync
+    XUserResolvePrivilegeWithUiResult
+    XUserResolveIssueWithUiAsync
+    XUserResolveIssueWithUiResult
+    XUserChangeEventRegister
+    XUserChangeEventUnregister

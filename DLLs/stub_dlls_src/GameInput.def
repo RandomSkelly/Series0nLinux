@@ -1,0 +1,5 @@
+LIBRARY GameInput.dll
+EXPORTS
+    GameInputCreate @1
+    DllCanUnloadNow @2
+    DllGetClassObject @3

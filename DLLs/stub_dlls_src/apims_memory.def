@@ -1,0 +1,5 @@
+LIBRARY api-ms-win-core-memory-l1-1-0
+EXPORTS
+    VirtualAlloc=kernel32.VirtualAlloc
+    VirtualQueryEx=kernel32.VirtualQueryEx
+    VirtualFree=StubVirtualFree

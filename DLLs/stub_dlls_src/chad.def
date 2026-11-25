@@ -1,0 +1,8 @@
+LIBRARY chad.dll
+EXPORTS
+    XDspActivate = ChadOk
+    XDspConnectWithMaximumStreamLimit = ChadOk
+    XDspDeactivate = ChadOk
+    XDspDisconnect = ChadOk
+    XDspSubmitCommand = ChadOk
+    XDspGetStatus = ChadBuffer

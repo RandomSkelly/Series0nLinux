@@ -1,0 +1,15 @@
+LIBRARY xaudio2_9xs.dll
+EXPORTS
+    XAudio2Create = XsXAudio2Create
+    XAudio2CreateWithVersionInfo = XsXAudio2CreateWithVersionInfo
+    XAudio2CreateProcessor = XsXAudio2CreateProcessor
+    XAudio2CreateXmaDecoder = XsXAudio2CreateXmaDecoder
+    XAudio2CreateXmaDecoderAsync = XsXAudio2CreateXmaDecoderAsync
+    XAudio2GetXmaDecoderRegistration = XsXAudio2GetXmaDecoderRegistration
+    XAudio2SetXmaDecoderRegistration = XsXAudio2SetXmaDecoderRegistration
+    XAudio2CreateVolumeMeter = XsXAudio2CreateVolumeMeter
+    XAudio2CreateReverb = XsXAudio2CreateReverb
+    XAudio2CreateApm = XsXAudio2CreateApm
+    XAudio2GetDeviceDetails = XsXAudio2GetDeviceDetails
+    XAudio2Initialize = XsXAudio2Initialize
+    XAudio2Uninitialize = XsXAudio2Uninitialize
