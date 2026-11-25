@@ -61,6 +61,9 @@ pip install pefile
 
 4. Check the terminal output or generated log file for `[Series0nLinux]` stub traces to identify unimplemented function calls.
 
+## Progress
+   So far, the `.dll`s fully load when launching a game, but then crash due to something missing inside of the `.dll`s. 
+
 ## Legal Disclaimer
 
 * **No Proprietary Code or Assets:** This repository contains **zero** proprietary source code, copyrighted binaries, cryptographic keys, or game assets. All shims are clean-room implementations created from scratch based on publicly available documentation and standard ABI specifications.
