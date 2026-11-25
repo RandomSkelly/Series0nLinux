@@ -62,7 +62,8 @@ pip install pefile
 4. Check the terminal output or generated log file for `[Series0nLinux]` stub traces to identify unimplemented function calls.
 
 ## Progress
-   So far, the `.dll`s fully load when launching a game, but then crash due to something missing inside of the `.dll`s. 
+-Boots to a white screen and then crashes. Stayed booted for 1 second before crashing.
+-According to the logs, the game reads the .dll files and attempts to boot, but is still missing some dependencies. 
 
 ## Legal Disclaimer
 
