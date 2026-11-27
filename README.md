@@ -53,7 +53,7 @@ pip install pefile
 4. Check the terminal output or generated log file for `[Series0nLinux]` stub traces to identify unimplemented function calls.
 
 ## Progress
-## 🚧 Development Progress — November 27, 2026
+## Development Progress — November 27, 2026
 
 Development has advanced through multiple stages of application startup and graphics initialization under Linux/Proton.
 
