@@ -93,12 +93,97 @@ static HRESULT run_provider_pass(XAsyncBlock* async, XAsyncProvider provider, vo
     return provider(op, &data);
 }
 
+// The title opens Xbox absolute paths such as platform:\shaders\... .  Wine
+// treats the volume name as a relative drive path (G:\platform:\...), so those
+// opens fail until the corresponding directories and placeholder files exist.
+// Create the small subset needed to get past shader/config initialization.
+struct PlaceholderFile {
+    const wchar_t* path;
+    const unsigned char* data;
+    DWORD size;
+};
+
+static void ensure_directory(const wchar_t* path) {
+    CreateDirectoryW(path, nullptr);
+}
+
+// The audio metadata loader requires a real RPF image (magic 0x52504639 / "9FPR").
+// Copy a small valid archive from the title root instead of creating an empty file.
+static void copy_file(const wchar_t* source, const wchar_t* destination) {
+    HANDLE input = CreateFileW(source, GENERIC_READ,
+                               FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+                               nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (input == INVALID_HANDLE_VALUE) return;
+
+    HANDLE output = CreateFileW(destination, GENERIC_WRITE,
+                                FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr,
+                                CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (output != INVALID_HANDLE_VALUE) {
+        unsigned char buffer[16384];
+        DWORD bytes_read = 0;
+        if (ReadFile(input, buffer, sizeof(buffer), &bytes_read, nullptr) && bytes_read) {
+            DWORD bytes_written = 0;
+            WriteFile(output, buffer, bytes_read, &bytes_written, nullptr);
+        }
+        CloseHandle(output);
+    }
+    CloseHandle(input);
+}
+
+static void create_placeholders() {
+    static const wchar_t* directories[] = {
+        L"audio:",
+        L"common:",
+        L"common:\\data",
+        L"platform:",
+        L"platform:\\data",
+        L"platform:\\data\\effects",
+        L"platform:\\data\\settings",
+        L"platform:\\shaders",
+        L"platform:\\shaders\\v2",
+        L"platform:\\shaders\\v2\\fxdb",
+        L"platform:\\shaders\\v2\\sga_xbsx_final",
+    };
+    for (const wchar_t* path : directories) ensure_directory(path);
+    copy_file(L"appdata0.rpf", L"audio:\\Core.Metadata.rpf");
+
+    static const unsigned char kVersion[] = {'1', '.', '0', '.', '2', '.', '1', '\n'};
+    static const unsigned char kShaderHeader[] = {0x53, 0x68, 0x06, 0x01, 0, 0, 0, 0};
+    static const PlaceholderFile files[] = {
+        {L"common:\\data\\version.txt", kVersion, sizeof(kVersion)},
+        {L"platform:\\data\\gameconfig.zmt", nullptr, 0},
+        {L"platform:\\data\\language_sheets.zmt", nullptr, 0},
+        {L"platform:\\data\\effects\\animimgfilters.zmt", nullptr, 0},
+        {L"platform:\\data\\settings\\presets.zmt", nullptr, 0},
+        {L"platform:\\shaders\\v2\\fxdb\\sga_xbsx_final.fxdb", kShaderHeader, sizeof(kShaderHeader)},
+        {L"platform:\\shaders\\v2\\fxdb\\sga_xbsx_final_init.fxdb", kShaderHeader, sizeof(kShaderHeader)},
+        {L"platform:\\shaders\\v2\\sga_xbsx_final_aco.d3d12PipelineCache", nullptr, 0},
+        {L"platform:\\shaders\\v2\\sga_xbsx_final\\AnimImgFilter.fxc", kShaderHeader, sizeof(kShaderHeader)},
+        {L"platform:\\shaders\\v2\\sga_xbsx_final\\im.fxc", kShaderHeader, sizeof(kShaderHeader)},
+        {L"platform:\\shaders\\v2\\sga_xbsx_final\\postfx_footage.fxc", kShaderHeader, sizeof(kShaderHeader)},
+    };
+    for (const PlaceholderFile& file : files) {
+        // Never replace real shader data placed here externally.  CREATE_NEW
+        // leaves an existing file untouched and only writes the placeholder
+        // when the path is absent.
+        HANDLE handle = CreateFileW(file.path, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr,
+                                    CREATE_NEW, FILE_ATTRIBUTE_NORMAL, nullptr);
+        if (handle == INVALID_HANDLE_VALUE) continue;
+        if (file.size) {
+            DWORD written = 0;
+            WriteFile(handle, file.data, file.size, &written, nullptr);
+        }
+        CloseHandle(handle);
+    }
+}
+
 }  // namespace
 
 extern "C" {
 
 BOOL WINAPI DllMain(HINSTANCE, DWORD reason, LPVOID) {
     if (reason == DLL_PROCESS_ATTACH && !g_queueLockReady) {
+        create_placeholders();
         InitializeCriticalSection(&g_queueLock);
         g_queueLockReady = true;
     } else if (reason == DLL_PROCESS_DETACH && g_queueLockReady) {

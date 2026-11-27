@@ -76,6 +76,8 @@ def build_command(cxx):
     cmd += [
         "-shared",
         "-Os",
+        "-g",
+        "-finstrument-functions",
         "-static-libgcc",
         "-static-libstdc++",
         "-Wl,--exclude-libs,ALL",
@@ -98,6 +100,14 @@ def preserve_curl_original():
 def preserve_bvh_original():
     original = GAME_DIR / "XboxBvhBuilder.dll"
     preserved = GAME_DIR / "XboxBvhBuilderOrig.dll"
+    if original.exists() and not preserved.exists():
+        shutil.copy2(original, preserved)
+        print(f"preserved {original.name} -> {preserved.name}")
+
+
+def preserve_bink_original():
+    original = GAME_DIR / "Bink2Scarlett.dll"
+    preserved = GAME_DIR / "Bink2ScarlettOrig.dll"
     if original.exists() and not preserved.exists():
         shutil.copy2(original, preserved)
         print(f"preserved {original.name} -> {preserved.name}")
@@ -131,10 +141,12 @@ def main():
     cmd = build_command(cxx)
     preserve_curl_original()
     preserve_bvh_original()
+    preserve_bink_original()
     SYNC_DIR.mkdir(parents=True, exist_ok=True)
 
     for dll, sources in BUILD.items():
         args = cmd + [str(GAME_DIR / dll)]
+        args.append(f"-DTRACE_TAG={Path(dll).stem}")
         args += [str(SRC_DIR / name) for name in sources]
         def_file = SRC_DIR / (Path(dll).stem + ".def")
         if def_file.exists():
@@ -144,7 +156,7 @@ def main():
         shutil.copy2(GAME_DIR / dll, SYNC_DIR / dll)
         print(f"built {dll} ({', '.join(sources + ([def_file.name] if def_file.exists() else []))})")
 
-    for preserved_name in ("XCurlOrig.dll", "XboxBvhBuilderOrig.dll"):
+    for preserved_name in ("XCurlOrig.dll", "XboxBvhBuilderOrig.dll", "Bink2ScarlettOrig.dll"):
         preserved = GAME_DIR / preserved_name
         if preserved.exists():
             shutil.copy2(preserved, SYNC_DIR / preserved_name)
