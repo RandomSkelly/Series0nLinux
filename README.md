@@ -15,15 +15,6 @@ Modern Xbox console titles share significant architectural DNA with Windows (x86
 * **Diagnostic Logging:** Detailed `stderr` and trace logging for unimplemented API calls to map out missing dependencies systematically.
 * **DirectX 12 / VKD3D Interop:** Bridging console-specific graphics extensions to standard Vulkan translation layers on Linux.
 
-## Repository Structure
-
-```text
-Series0nLinux/
-├── build/              # Pre-compiled x86_64 Windows DLL shims
-├── scripts/            # Python utilities for PE header inspection & diagnostics
-└── docs/               # Architecture notes & API compatibility tracking
-```
-
 ## Prerequisites
 
 To use the compatibility shims and diagnostic scripts on Linux, you will need:
