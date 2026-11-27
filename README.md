@@ -62,9 +62,36 @@ pip install pefile
 4. Check the terminal output or generated log file for `[Series0nLinux]` stub traces to identify unimplemented function calls.
 
 ## Progress
--Boots to a white screen and then crashes. Stayed booted for 1 second before crashing.
--According to the logs, the game reads the .dll files and attempts to boot, but is still missing some dependencies. 
+## 🚧 Development Progress — November 27, 2026
 
+Development has advanced through multiple stages of application startup and graphics initialization under Linux/Proton.
+
+### Major Milestones
+- Successfully initializes the application window.
+- Reaches the D3D12 device-creation path.
+- Implemented runtime compatibility components.
+- Improved filesystem and asset-path handling.
+- Resolved several initialization errors and crashes.
+- Extended diagnostic tracing across compatibility libraries.
+- Identified repeated command-list creation and resource initialization loops.
+- Investigated shader container formats and resource loading behavior.
+
+### Current Status
+- Application remains alive during extended startup tests.
+- Graphics initialization is partially reached.
+- Persistent initialization loop remains unresolved.
+- No successful rendered frame yet.
+
+### Current Focus
+- Shader container compatibility.
+- Resource initialization.
+- D3D12 command-list behavior.
+- Identifying the remaining startup bottleneck.
+
+### Overall
+The project has progressed beyond its initial startup failures and is now focused on resolving the remaining graphics initialization issues.
+
+**Status: Active development — graphics initialization research ongoing.**
 ## Legal Disclaimer
 
 * **No Proprietary Code or Assets:** This repository contains **zero** proprietary source code, copyrighted binaries, cryptographic keys, or game assets. All shims are clean-room implementations created from scratch based on publicly available documentation and standard ABI specifications.
